@@ -23,29 +23,34 @@ var handleButton = function(event, params, modal) {
     normalColor  = params.confirmButtonColor;
     hoverColor   = colorLuminance(normalColor, -0.04);
     activeColor  = colorLuminance(normalColor, -0.14);
+  } else if (targetedReject && params.rejectButtonColor) {
+    normalColor  = params.rejectButtonColor;
+    hoverColor   = colorLuminance(normalColor, -0.04);
+    activeColor  = colorLuminance(normalColor, -0.14);
   }
 
-  function shouldSetConfirmButtonColor(color) {
-    if (targetedConfirm && params.confirmButtonColor) {
+  function shouldSetButtonColor(color) {
+    if ((targetedConfirm && params.confirmButtonColor) ||
+        (targetedReject && params.rejectButtonColor)) {
       target.style.backgroundColor = color;
     }
   }
 
   switch (e.type) {
     case 'mouseover':
-      shouldSetConfirmButtonColor(hoverColor);
+      shouldSetButtonColor(hoverColor);
       break;
 
     case 'mouseout':
-      shouldSetConfirmButtonColor(normalColor);
+      shouldSetButtonColor(normalColor);
       break;
 
     case 'mousedown':
-      shouldSetConfirmButtonColor(activeColor);
+      shouldSetButtonColor(activeColor);
       break;
 
     case 'mouseup':
-      shouldSetConfirmButtonColor(hoverColor);
+      shouldSetButtonColor(hoverColor);
       break;
 
     case 'focus':
