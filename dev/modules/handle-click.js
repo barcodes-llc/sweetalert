@@ -11,6 +11,7 @@ var handleButton = function(event, params, modal) {
   var target = e.target || e.srcElement;
 
   var targetedConfirm = target.className.indexOf('confirm') !== -1;
+  var targetedReject = target.className.indexOf('reject') !== -1;
   var targetedOverlay = target.className.indexOf('sweet-overlay') !== -1;
   var modalIsVisible  = hasClass(modal, 'visible');
   var doneFunctionExists = (params.doneFunction && modal.getAttribute('data-has-done-function') === 'true');
@@ -49,10 +50,13 @@ var handleButton = function(event, params, modal) {
 
     case 'focus':
       let $confirmButton = modal.querySelector('button.confirm');
+      let $rejectButton = modal.querySelector('button.reject');
       let $cancelButton  = modal.querySelector('button.cancel');
 
       if (targetedConfirm) {
         $cancelButton.style.boxShadow = 'none';
+      } else if (targetedReject) {
+        $rejectButton.style.boxShadow = 'none';
       } else {
         $confirmButton.style.boxShadow = 'none';
       }
@@ -69,6 +73,8 @@ var handleButton = function(event, params, modal) {
 
       if (targetedConfirm && doneFunctionExists && modalIsVisible) {
         handleConfirm(modal, params);
+      } else if (targetedReject && doneFunctionExists && modalIsVisible) {
+        handleReject(modal, params);
       } else if (doneFunctionExists && modalIsVisible || targetedOverlay) {
         handleCancel(modal, params);
       } else if (isDescendant(modal, target) && target.tagName === 'BUTTON') {
@@ -104,17 +110,20 @@ var handleConfirm = function(modal, params) {
 };
 
 /*
+ *  User clicked on "Reject"
+ */
+var handleReject = function(modal, params) {
+  params.doneFunction(false);
+
+  if (params.closeOnReject) {
+    sweetAlert.close();
+  }
+};
+
+/*
  *  User clicked on "Cancel"
  */
 var handleCancel = function(modal, params) {
-  // Check if callback function expects a parameter (to track cancel actions)
-  var functionAsStr = String(params.doneFunction).replace(/\s/g, '');
-  var functionHandlesCancel = functionAsStr.substring(0, 9) === 'function(' && functionAsStr.substring(9, 10) !== ')';
-
-  if (functionHandlesCancel) {
-    params.doneFunction(false);
-  }
-
   if (params.closeOnCancel) {
     sweetAlert.close();
   }
@@ -124,5 +133,6 @@ var handleCancel = function(modal, params) {
 export default {
   handleButton,
   handleConfirm,
+  handleReject,
   handleCancel
 };

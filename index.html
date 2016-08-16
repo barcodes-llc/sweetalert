@@ -484,9 +484,11 @@ document.querySelector('ul.examples li.warning.confirm button').onclick = functi
 		showCancelButton: true,
 		confirmButtonColor: '#DD6B55',
 		confirmButtonText: 'Yes, delete it!',
-		closeOnConfirm: false
+		closeOnConfirm: false,
+    showRejectButton: true
 	},
-	function(){
+	function(a){
+    alert(a);
 		swal("Deleted!", "Your imaginary file has been deleted!", "success");
 	});
 };
@@ -545,7 +547,7 @@ document.querySelector('ul.examples li.input button').onclick = function(){
 			swal.showInputError("You need to write something!");
 			return false;
 		}
-    
+
 		swal("Nice!", 'You wrote: ' + inputValue, "success");
 
 	});

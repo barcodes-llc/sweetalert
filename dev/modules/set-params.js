@@ -26,6 +26,7 @@ var setParameters = function(params) {
   var $title = modal.querySelector('h2');
   var $text = modal.querySelector('p');
   var $cancelBtn = modal.querySelector('button.cancel');
+  var $rejectBtn = modal.querySelector('button.reject');
   var $confirmBtn = modal.querySelector('button.confirm');
 
   /*
@@ -156,6 +157,16 @@ var setParameters = function(params) {
   }
 
   /*
+   * Show reject button?
+   */
+  modal.setAttribute('data-has-reject-button', params.showRejectButton);
+  if (params.showRejectButton) {
+    $rejectBtn.style.display = 'inline-block';
+  } else {
+    hide($rejectBtn);
+  }
+
+  /*
    * Show confirm button?
    */
   modal.setAttribute('data-has-confirm-button', params.showConfirmButton);
@@ -166,10 +177,13 @@ var setParameters = function(params) {
   }
 
   /*
-   * Custom text on cancel/confirm buttons
+   * Custom text on cancel/reject/confirm buttons
    */
   if (params.cancelButtonText) {
     $cancelBtn.innerHTML = escapeHtml(params.cancelButtonText);
+  }
+  if (params.rejectButtonText) {
+    $rejectBtn.innerHTML = escapeHtml(params.rejectButtonText);
   }
   if (params.confirmButtonText) {
     $confirmBtn.innerHTML = escapeHtml(params.confirmButtonText);
@@ -188,6 +202,17 @@ var setParameters = function(params) {
 
     // Set box-shadow to default focused button
     setFocusStyle($confirmBtn, params.confirmButtonColor);
+  }
+
+  /*
+   * Custom color on reject button
+   */
+  if (params.rejectButtonColor) {
+    // Set confirm button to selected background color
+    $rejectBtn.style.backgroundColor = params.rejectButtonColor;
+
+    // Set box-shadow to default focused button
+    setFocusStyle($rejectBtn, params.rejectButtonColor);
   }
 
   /*

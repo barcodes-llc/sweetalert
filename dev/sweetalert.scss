@@ -241,7 +241,8 @@ body.stop-scrolling {
     &:active {
       background-color: darken($btnBlue, 10%);
     }
-    &.cancel {
+    &.cancel,
+    &.reject {
       background-color: $btnGray;
       &:hover {
         background-color: darken($btnGray, 3%);

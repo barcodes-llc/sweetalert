@@ -166,7 +166,7 @@ export default sweetAlert = swal = function() {
       }
     }, 0);
   };
-  
+
   // Show alert with enabled buttons always
   swal.enableButtons();
 };
@@ -281,24 +281,28 @@ sweetAlert.resetInputError = swal.resetInputError = function(event) {
 };
 
 /*
- * Disable confirm and cancel buttons
+ * Disable confirm, reject, and cancel buttons
  */
 sweetAlert.disableButtons = swal.disableButtons = function(event) {
   var modal = getModal();
   var $confirmButton = modal.querySelector('button.confirm');
+  var $rejectButton = modal.querySelector('button.reject');
   var $cancelButton = modal.querySelector('button.cancel');
   $confirmButton.disabled = true;
+  $rejectButton.disabled = true;
   $cancelButton.disabled = true;
 };
 
 /*
- * Enable confirm and cancel buttons
+ * Enable confirm, reject, and cancel buttons
  */
 sweetAlert.enableButtons = swal.enableButtons = function(event) {
   var modal = getModal();
   var $confirmButton = modal.querySelector('button.confirm');
+  var $rejectButton = modal.querySelector('button.reject');
   var $cancelButton = modal.querySelector('button.cancel');
   $confirmButton.disabled = false;
+  $rejectButton.disabled = false;
   $cancelButton.disabled = false;
 };
 
