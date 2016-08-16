@@ -219,6 +219,7 @@ body.stop-scrolling {
   button {
     $btnBlue: #8CD4F5;
     $btnGray: #C1C1C1;
+    $btnRed: #F58C8C;
 
     background-color: $btnBlue;
     color: white;
@@ -241,14 +242,27 @@ body.stop-scrolling {
     &:active {
       background-color: darken($btnBlue, 10%);
     }
-    &.cancel,
-    &.reject {
+    &.cancel {
       background-color: $btnGray;
       &:hover {
         background-color: darken($btnGray, 3%);
       }
       &:active {
         background-color: darken($btnGray, 10%);
+      }
+      // Cancel button should keep the same style
+      &:focus {
+        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
+      }
+    }
+
+    &.reject {
+      background-color: $btnRed;
+      &:hover {
+        background-color: darken($btnRed, 3%);
+      }
+      &:active {
+        background-color: darken($btnRed, 10%);
       }
       // Cancel button should keep the same style
       &:focus {

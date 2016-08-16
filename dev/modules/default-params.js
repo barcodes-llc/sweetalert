@@ -13,7 +13,7 @@ var defaultParams = {
   confirmButtonColor: '#8CD4F5',
   cancelButtonText: 'Cancel',
   rejectButtonText: 'Reject',
-  rejectButtonColor: '#888',
+  rejectButtonColor: '#F58C8C',
   imageUrl: null,
   imageSize: null,
   timer: null,
